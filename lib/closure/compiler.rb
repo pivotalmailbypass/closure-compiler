@@ -22,6 +22,7 @@ module Closure
     def compile(io)
       result, error = nil, nil
       status = Closure::Popen.popen(command) do |stdin, stdout, stderr|
+        stdin.binmode
         if io.respond_to? :read
           while buffer = io.read(4096) do
             stdin.write(buffer)
